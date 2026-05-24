@@ -1,0 +1,26 @@
+.footer {
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-300);
+  padding: var(--space-md) 0;
+  margin-top: auto;
+}
+
+.footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.footer a {
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-white);
+  }
+}
+
+.footer__copyright {
+  font-size: var(--text-sm);
+}

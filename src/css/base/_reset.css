@@ -1,0 +1,124 @@
+/* Modern CSS Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: #0a0f14;
+
+  &::before,
+  &::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    opacity: .08;
+    background-image: url('/src/assets/images/difesa-pcb-bg.svg');
+  }
+
+  &::before {
+    left: 0;
+    transform: rotateY(-180deg);
+  }
+
+  &::after {
+    right: 0;
+  }
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  all: unset;
+  outline: revert;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus:not(:-moz-focusring) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+a {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

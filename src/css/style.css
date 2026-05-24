@@ -1,0 +1,21 @@
+/* ==========================================================================
+   Main stylesheet — import order matters
+   ========================================================================== */
+
+/* Base: variables, reset, typography */
+@import './base/_variables.css';
+@import './base/_reset.css';
+@import './base/_fonts.css';
+
+/* Layout */
+@import './layout/_header.css';
+@import './layout/_main-content.css';
+@import './layout/_footer.css';
+
+/* Components (add as needed) */
+/* @import './components/_button.css'; */
+/* @import './components/_card.css'; */
+@import './components/_glow.css';
+
+/* Utilities — always last so they can override */
+@import './utilities/_utilities.css';
