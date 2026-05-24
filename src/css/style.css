@@ -12,10 +12,7 @@
 @import './layout/_main-content.css';
 @import './layout/_footer.css';
 
-/* Components (add as needed) */
-/* @import './components/_button.css'; */
-/* @import './components/_card.css'; */
-@import './components/_glow.css';
+@import './components/_orbs.css';
 
 /* Utilities — always last so they can override */
 @import './utilities/_utilities.css';

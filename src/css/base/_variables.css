@@ -111,7 +111,7 @@
 
 @media (--desktop-min-sm) {
   :root {
-    --orb-size: 220px;
+    --orb-size: 16vh;
   }
 }
 

@@ -285,7 +285,7 @@
     text-align: center;
 
     @media (--phone-min-md) {
-        font-size: 0.6rem;
+        font-size: 0.75rem;
         display: block;
         max-width: 80%;
         overflow-wrap: break-word;
@@ -293,7 +293,7 @@
         hyphens: auto;
     }
 
-    @media (--desktop-min) {
+    @media (--desktop-min-sm) {
         font-size: 0.9rem;
         letter-spacing: 0.03em;
     }

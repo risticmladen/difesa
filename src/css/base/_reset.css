@@ -35,7 +35,10 @@ body {
     width: 50%;
     top: 0;
     opacity: .08;
+    background-repeat: repeat-y;
+    background-size: 50%;
     background-image: url('/src/assets/images/difesa-pcb-bg.svg');
+    background-position-x: right;
   }
 
   &::before {
@@ -110,7 +113,6 @@ a {
   text-decoration-skip-ink: auto;
   color: currentColor;
 }
-
 
 @media (prefers-reduced-motion: reduce) {
   *,

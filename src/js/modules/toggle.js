@@ -109,6 +109,12 @@ function initOrbPanels() {
     activeId = null
   }
 
+  // Close button inside description
+  const closeBtn = grid.querySelector('.grid-dail__description-close')
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => closeAll())
+  }
+
   // Orb button clicks
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {

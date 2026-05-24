@@ -1,5 +1,7 @@
 node_modules/
 dist/
+design-files/
+.idea/
 .DS_Store
 *.local
 .env
