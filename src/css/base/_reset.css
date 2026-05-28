@@ -13,17 +13,19 @@ html {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  height: 100svh;
+  overflow: hidden;
 }
 
 body {
   position: relative;
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   background-color: #0a0f14;
+  overflow: hidden;
 
   &::before,
   &::after {
