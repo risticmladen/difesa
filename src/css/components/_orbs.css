@@ -77,11 +77,12 @@
             filter var(--orb-ease),
             box-shadow var(--orb-ease);
     overflow: visible;
-}
+    min-width: var(--orb-size);
 
-.orb-button.is-dimmed {
-  filter: grayscale(1);
-  transition: filter var(--transition-base);
+    &.is-dimmed {
+        filter: grayscale(1);
+        transition: filter var(--transition-base);
+    }
 }
 
 .orb-button:hover,
@@ -109,10 +110,6 @@
 
 .orb-button:active {
     transform: scale(var(--orb-press-scale));
-}
-
-.orb-button.is-dimmed {
-    filter: grayscale(1);
 }
 
 .ring,
