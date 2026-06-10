@@ -167,10 +167,18 @@
 
   & .circle8 {
     align-items: flex-end;
+
+    @media (--desktop-min-lg) {
+      align-items: center;
+    }
   }
 
   & .circle4 {
     align-items: flex-start;
+
+    @media (--desktop-min-lg) {
+      align-items: center;
+    }
   }
 
   & .circle7,
