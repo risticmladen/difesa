@@ -20,58 +20,40 @@
   padding-inline: var(--container-padding);
 }
 
+/* Gives the dial its full-height context for percentage-based orb positioning */
 .parent {
-  display: grid;
+  height: 100%;
 }
 
+/* ==========================================================================
+   Dial ring
+   Uses CSS trigonometric positioning so the oval and every orb share a
+   single coordinate system — width + aspect-ratio — and stay perfectly
+   centred at every viewport width.
+
+   Geometry:
+     - container: 16 / 10 aspect-ratio, max 860 px wide
+     - orb centres: 42% radius from the container centre in each axis
+     - oval border: inset 8% on every side
+         (50% – 42% = 8% → the ellipse edge lands exactly on orb centres)
+   ========================================================================== */
 .grid-dail {
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0;
-  grid-row-gap: 0;
-  list-style: none;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  height: 100%;
-  max-height: 100%;
-  margin-top: 0;
+  width: min(92vw, 860px);
+  aspect-ratio: 16 / 10;
+  max-height: 85svh;
+  margin-inline: auto;   /* horizontally centres the dial within the container */
+  list-style: none;
 
-  @media (--desktop-min-sm) {
-    max-width: 75vw;
-    margin-inline: auto;
-  }
-
+  /* Oval background + border — perfectly aligned with orb centres */
   &::before,
   &::after {
     content: '';
-    display: block;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    bottom: 0;
-    right: 0;
-    border-radius: var(--radius-full);
+    inset: 8%;
+    border-radius: 50%;
+    pointer-events: none;
     z-index: -1;
-    width: 78%;
-    height: 80%;
-
-    @media (--phone-min-md) {
-      width: 80%;
-      height: 67%;
-    }
-
-    @media (--tablet-min) {
-      width: 75%;
-      height: 63%;
-    }
-
-    @media (--desktop-min-sm) {
-      width: 60vw;
-      height: 60vh;
-      max-width: 750px;
-    }
   }
 
   &::before {
@@ -83,132 +65,100 @@
     border: 2px solid white;
   }
 
+  /* Every list item is absolutely centred on its computed position */
   & > li {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: var(--space-md) var(--space-xs);
-
-    @media (--tablet-min) {
-      padding: var(--space-md);
-    }
+    align-items: center;
+    transform: translate(-50%, -50%);
+    /* Give each item the orb's own dimensions so .orb-stage 100% resolves correctly */
+    width: var(--orb-size);
+    height: var(--orb-size);
   }
 
   .grid-dail__description-close {
     cursor: pointer;
     display: none;
   }
+}
 
-  & .triggered-content {
-    display: flex;
-    justify-content: flex-start;
+/* ---------------------------------------------------------------------------
+   Centre element — logo + description panel
 
-    @media (--phone-max-md) {
-      width: 50vw;
-      border-radius: var(--space-xs);
-      padding: var(--space-sm);
+   .grid-dail > prefix raises specificity above .grid-dail > li (0-1-1)
+   so width / align-items overrides are applied correctly.
+   --------------------------------------------------------------------------- */
+.grid-dail > .circle1 {
+  /* Override the orb-size dimensions set on all li items */
+  width: 38%;
+  height: auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+  top: 50%;
+  left: 50%;
+}
 
-      & .grid-dail__description-close {
-        display: flex;
-        position: absolute;
-        top: .5rem;
-        right: .5rem;
-      }
-    }
+/* Mobile: show the triggered description as a centred modal overlay */
+.grid-dail > .circle1.triggered-content {
+  @media (--phone-max-md) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90vw, 320px);
+    height: auto;
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    background-color: var(--color-gray-800);
+    z-index: var(--z-overlay);
+    align-items: stretch;
 
-    @media (--desktop-min-sm) {
-      height: 60%;
+    & .grid-dail__description-close {
+      display: flex;
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
     }
 
     & .central-logo {
       display: none;
-
-      @media (--desktop-min-sm) {
-        display: block;
-      }
-    }
-  }
-
-  & .circle1 {
-    margin: 0 auto;
-  }
-
-  & .circle2 {
-    padding-bottom: 0;
-    margin-bottom: -50%;
-
-    @media (--phone-max-sm) {
-      margin-bottom: 0;
-    }
-  }
-
-  & .circle6 {
-    padding-top: 0;
-    margin-top: -50%;
-
-    @media (--phone-max-sm) {
-      margin-top: 0;
-    }
-  }
-
-  & .circle2,
-  & .circle6 {
-    align-items: center;
-  }
-
-  & .circle3,
-  & .circle5 {
-    align-items: center;
-
-    @media (--tablet-min) {
-      align-items: flex-end;
-    }
-  }
-
-  & .circle8 {
-    align-items: flex-end;
-
-    @media (--desktop-min-lg) {
-      align-items: center;
-    }
-  }
-
-  & .circle4 {
-    align-items: flex-start;
-
-    @media (--desktop-min-lg) {
-      align-items: center;
-    }
-  }
-
-  & .circle7,
-  & .circle9 {
-    align-items: center;
-
-    @media (--tablet-min) {
-      align-items: flex-start;
     }
   }
 }
 
-.circle1 { grid-area: 2 / 2 / 5 / 3; }
-.circle2 { grid-area: 1 / 2 / 2 / 3; }
-.circle3 { grid-area: 2 / 1 / 3 / 2; }
-.circle4 { grid-area: 3 / 1 / 4 / 2; }
-.circle5 { grid-area: 4 / 1 / 5 / 2; }
-.circle6 { grid-area: 5 / 2 / 6 / 3; }
-.circle7 { grid-area: 4 / 3 / 5 / 4; }
-.circle8 { grid-area: 3 / 3 / 4 / 4; }
-.circle9 { grid-area: 2 / 3 / 3 / 4; }
+/* ---------------------------------------------------------------------------
+   8 orb positions — 45° apart, clockwise from top (−90°)
 
+   left: % resolves against container width
+   top:  % resolves against container height
+
+   Using the same 42% in both axes is intentional: because left/top
+   percentages reference different dimensions (W vs H), the 16:10
+   container naturally stretches the positions into a matching ellipse.
+   --------------------------------------------------------------------------- */
+.circle2 { left: calc(50% + 42% * cos(-90deg));  top: calc(50% + 42% * sin(-90deg));  } /* top          */
+.circle9 { left: calc(50% + 42% * cos(-45deg));  top: calc(50% + 42% * sin(-45deg));  } /* top-right    */
+.circle8 { left: calc(50% + 42% * cos(0deg));    top: calc(50% + 42% * sin(0deg));    } /* right        */
+.circle7 { left: calc(50% + 42% * cos(45deg));   top: calc(50% + 42% * sin(45deg));   } /* bottom-right */
+.circle6 { left: calc(50% + 42% * cos(90deg));   top: calc(50% + 42% * sin(90deg));   } /* bottom       */
+.circle5 { left: calc(50% + 42% * cos(135deg));  top: calc(50% + 42% * sin(135deg));  } /* bottom-left  */
+.circle4 { left: calc(50% + 42% * cos(180deg));  top: calc(50% + 42% * sin(180deg));  } /* left         */
+.circle3 { left: calc(50% + 42% * cos(225deg));  top: calc(50% + 42% * sin(225deg));  } /* top-left     */
+
+/* ---------------------------------------------------------------------------
+   Central logo visibility
+   --------------------------------------------------------------------------- */
 .central-logo {
+  margin-inline: auto;
+
   @media (--phone-max-sm) {
     display: none;
   }
 
   @media (--phone-min-md) {
     display: block;
-
   }
 
   @media (--phone-max-md) {
@@ -241,5 +191,3 @@
     padding-left: var(--space-lg);
   }
 }
-
-
