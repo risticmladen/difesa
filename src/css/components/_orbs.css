@@ -278,25 +278,24 @@
 
 .orb-label {
     color: var(--color-gray-300);
+    display: block;
     text-align: center;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-    /* Anchored below the orb circle via .orb-card { position: relative } */
+    /* Anchored below the orb circle via .orb-card { position: relative }.
+       position: absolute keeps it out of flow — orb sizing and centering unaffected. */
     position: absolute;
     top: calc(100% + 4px);
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
     width: max-content;
-    max-width: calc(var(--orb-size) * 1.4);
-    /* Hidden on mobile, visible from tablet up */
-    display: none;
-
-    @media (--tablet-min) {
-        display: block;
-        font-size: 0.75rem;
-    }
+    max-width: calc(var(--orb-size) * 1.5);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    background-color: var(--color-bg);
+    padding: 0 4px;
 
     @media (--desktop-min-md) {
         font-size: 0.9rem;
