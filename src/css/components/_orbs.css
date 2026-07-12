@@ -278,16 +278,24 @@
 
 .orb-label {
     color: var(--color-gray-300);
-    display: none;
     text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    /* Anchored below the orb circle via .orb-card { position: relative } */
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    width: max-content;
+    max-width: calc(var(--orb-size) * 1.4);
+    /* Hidden on mobile, visible from tablet up */
+    display: none;
 
     @media (--tablet-min) {
-        font-size: 0.75rem;
         display: block;
-        max-width: 80%;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: auto;
+        font-size: 0.75rem;
     }
 
     @media (--desktop-min-md) {
